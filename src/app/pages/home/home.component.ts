@@ -22,14 +22,13 @@ export class HomeComponent {
   maxSize            :number   = 5            ;
 
   constructor(
-    private router      : Router      ,
     private usersService: UsersService
     ) { }
 
 
   verItem(item: IItem) {
     //nueva pestana usando el login del usuario y router
-    window.open(`/user/${item.login}`, '_blank');
+    window.open(`/user/${item.login}/${item.score}`, '_blank');
   }
 
   //funcion que se ejecuta al cambiar de pagina

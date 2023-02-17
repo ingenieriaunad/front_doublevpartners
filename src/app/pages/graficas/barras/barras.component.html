@@ -1,0 +1,10 @@
+<div class="alert alert-info" role="alert" *ngIf="loader">
+  <h4 class="alert-heading">Estamos cargando la información solicitada</h4>
+</div>
+<canvas baseChart class="chart"
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [type]="barChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+</canvas>

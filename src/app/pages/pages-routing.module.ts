@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { MainComponent } from './main/main.component';
+import { ValidarScoreGuard } from '../guards/validar-score.guard';
 
 const routes: Routes = [
   {
@@ -10,17 +11,18 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
+        path: '',
+        component: HomeComponent
+      },
+      {
         path: 'home',
         component: HomeComponent
       },
       {
-        path: 'user/:id',
-        component: UserComponent
+        path: 'user/:id/:score',
+        component: UserComponent,
+        canMatch: [ValidarScoreGuard]
       },
-      {
-        path: '**',
-        redirectTo: 'home'
-      }
     ]
   }
 ];
