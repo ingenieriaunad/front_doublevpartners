@@ -9,8 +9,10 @@ import { IItem, IUsers } from '../../interfaces/user';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  title    = 'Proyecto usuarios';
-  faSearch = faSearch;
+  title       = 'Proyecto usuarios';
+  faSearch    = faSearch;
+  errorSearch        :boolean  = false;
+  errorSearchMessge  :string   = ''           ;
   inputSearch        :string   = ''           ;
   items              : any[]   = []           ;
   totalItems         :number   = 0            ;
@@ -37,10 +39,25 @@ export class HomeComponent {
   }
   //funcion que obtiene la lista de usuarios buscados
   searchUser() {
+    this.errorSearch = false;
+    //valida que se ingrese al menos 4 caracteres
+    if(this.inputSearch.length<4){
+      this.errorSearch = true;
+      this.errorSearchMessge = 'Debe ingresar al menos 4 caracteres';
+      this.resetSearch();
+      return;
+    }
+    //valida que no se ingrese el texto doublevpartners.
+    if(this.inputSearch.toLowerCase().includes('doublevpartners')){
+      this.errorSearch = true;
+      this.errorSearchMessge = 'No se puede ingresar el texto "doublevpartners"';
+      this.resetSearch();
+      return;
+    }
     const search = {
       name    : this.inputSearch ,
       per_page: this.itemsPerPage,
-      page    : this.currentPage
+      page    : this.currentPage,
     };
     this.usersService.getUsers(search)
     .subscribe((res:IUsers)=>{
@@ -51,9 +68,6 @@ export class HomeComponent {
 
   //resetea los valores de la busqueda
   resetSearch(){
-    if(this.inputSearch.length!=0){
-      return;
-    }
     this.items = [];
     this.totalItems = 0;
     this.currentPage = 1;

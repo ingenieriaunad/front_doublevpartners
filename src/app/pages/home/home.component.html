@@ -31,13 +31,18 @@
                       <fa-icon [icon]="faSearch"></fa-icon>
                     </button>
                   </div>
+                  <!-- error de busqueda -->
+                  <div class="alert alert-danger" role="alert" *ngIf="errorSearch">
+                    <h4 class="alert-heading">Error</h4>
+                    <p>{{ errorSearchMessge }}</p>
+                  </div>
               </form>
             </div>
           </div>
           <!-- Fin buscador de usuarios -->
           <!-- Resultado de la busqueda -->
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" *ngIf="!errorSearch">
               <div class="alert alert-info" role="alert">
                 <h4 class="alert-heading">Información</h4>
                 <p>
