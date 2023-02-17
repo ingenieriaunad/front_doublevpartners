@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center pt-2">
+      <!-- card -->
+      <div class="card">
+        <div class="card-header bg-dark ">
+          <h1>
+            <span class="text-white">Consulta tu</span>
+            <span class="text-info"> usuario</span>
+          </h1>
+        </div>
+        <div class="card-body">
+          <!-- Buscador de usuarios -->
+          <div class="row">
+            <div class="col-lg-12">
+              <form (ngSubmit)="searchUser()">
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Buscar por nombre"
+                      name="inputSearch"
+                      [(ngModel)]="inputSearch"
+                      (ngModelChange)="resetSearch()"
+                    >
+                    <button
+                      class="btn btn-primary"
+                      type="submit"
+                      id="btnSearch"
+                    >
+                      <fa-icon [icon]="faSearch"></fa-icon>
+                    </button>
+                  </div>
+              </form>
+            </div>
+          </div>
+          <!-- Fin buscador de usuarios -->
+          <!-- Resultado de la busqueda -->
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Información</h4>
+                <p>
+                  <span *ngIf="totalItems == 0">No hay registros para mostrar</span>
+                  <span *ngIf="totalItems > 0">Se encontraron {{ totalItems }} registros</span>
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-12" *ngIf="totalItems > 0">
+              <div class="card">
+                  <div class="card-body">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Nombre</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of items">
+                          <td>{{ item.id }}</td>
+                          <td>{{ item.login }}</td>
+                          <td>
+                            <button class="btn btn-primary" (click)="verItem(item)">Ver</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div class="row">
+                      <div class="col-lg-10">
+                        <pagination
+                          [totalItems]="totalItems"
+                          [(ngModel)]="currentPage"
+                          [itemsPerPage]="itemsPerPage"
+                          [maxSize]="maxSize"
+                          [boundaryLinks]="true"
+                          [rotate]="false"
+                          (pageChanged)="pageChanged($event)"
+                          [previousText]="'Anterior'"
+                          [nextText]="'Siguiente'"
+                          [firstText]="'Primero'"
+                          [lastText]="'Último'"
+                          [directionLinks]="true"
+                        ></pagination>
+                      </div>
+                      <div class="col-lg-2 text-center">
+                        <!-- selector de cantidad de registros por pagina -->
+                        <div class="form-inline">
+                          <label class="my-1 me-2">Mostrar</label>
+                          <select
+                            class=""
+                            [(ngModel)]="itemsPerPage"
+                            (change)="searchUser()"
+                          >
+                            <option *ngFor="let item of itemsPerPageOptions" [value]="item">
+                              {{ item }}
+                            </option>
+                          </select>
+                          <label class="my-1 ms-2">registros</label>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer bg-primary"></div>
+      </div>
+    </div>
+  </div>
+</div>

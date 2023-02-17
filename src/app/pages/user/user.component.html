@@ -1,0 +1,25 @@
+<div class="container-fluid pt-3 bg-info vh-100 px-3">
+  <div class="row">
+    <div class="card mb-3 p-0 border-primary" style="max-width: 600px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{user.avatar_url}}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">Usuario: {{user.name}}</h5>
+            <p class="card-text">
+              {{ user.bio? user.bio : 'No hay información disponible' }}
+            </p>
+            <!-- seguidores -->
+            <div>
+              <span class="badge bg-primary p-2 me-2">Seguidores: {{user.followers}}</span>
+              <span class="badge bg-success p-2 me-2">Siguiendo: {{user.following}}</span>
+              <span class="badge bg-info p-2">Repos: {{user.public_repos}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

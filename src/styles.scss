@@ -1,0 +1,14 @@
+@import 'bootstrap/scss/bootstrap';
+@import "vars";
+.bg-purple {
+  background-color: var(--bs-purple);
+}
+.bg-purple-semi {
+  background-color: var(--bs-purple-semi);
+}
+
+/* Importing Bootstrap SCSS file. */
+@import "./node_modules/bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
